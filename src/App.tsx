@@ -1,8 +1,7 @@
-import { useState } from "react";
 import "./App.css";
 
 function App() {
-  return <div>KidAdult</div>;
+  return <div>Hello Test</div>;
 }
 
 export default App;
