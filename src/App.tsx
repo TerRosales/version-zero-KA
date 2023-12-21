@@ -1,7 +1,13 @@
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
+
+import Signup from "./components/Login/Signup";
+
 function App() {
-  return <><Navbar /><div>Hello Test</div></>;
+  return (
+    <div>
+      <Signup />
+    </div>
+  );
 }
 
 export default App;
