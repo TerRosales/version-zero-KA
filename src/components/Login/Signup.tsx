@@ -140,34 +140,41 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h1>Signup Page</h1>
-      <form>
+    <div className="app__signup-container">
+      <h1 className="app__signup-form_title">Signup Page</h1>
+      <form className="app__signup-form">
         <input
+          className="app__signup-form_input"
           type="text"
           name="username"
           placeholder="Username"
           onChange={handleInputChange}
         />
-        {errors.username && <span>{errors.username}</span>}
+        <br />
+        {errors.username && <span className="app__form-error">{errors.username}</span>}
         <br />
         <input
+          className="app__signup-form_input"
           type="email"
           name="emailAddress"
           placeholder="Email Address"
           onChange={handleInputChange}
         />
-        {errors.emailAddress && <span>{errors.emailAddress}</span>}
+        <br />
+        {errors.emailAddress && <span className="app__form-error">{errors.emailAddress}</span>}
         <br />
         <input
+          className="app__signup-form_input"
           type="string"
           name="securityPin"
           placeholder="Security Pin"
           onChange={handleInputChange}
         />
-        {errors.securityPin && <span>{errors.securityPin}</span>}
+        <br />
+        {errors.securityPin && <span className="app__form-error">{errors.securityPin}</span>}
         <br />
         <input
+          className="app__signup-form_input"
           type="password"
           name="password"
           placeholder="Password"
@@ -175,19 +182,16 @@ const SignUp = () => {
         />
         <br />
         {errors.password && (
-          <div>
+          <div className="app__form-errorSet">
             {errors.password.lengthError && (
               <span className="app__signup-error">{errors.password.lengthError}</span>
             )}
-            <br />
             {errors.password.lowercaseError && (
               <span className="app__signup-error">{errors.password.lowercaseError}</span>
             )}
-            <br />
             {errors.password.uppercaseError && (
               <span className="app__signup-error">{errors.password.uppercaseError}</span>
             )}
-            <br />
             {errors.password.numberError && (
               <span className="app__signup-error">{errors.password.numberError}</span>
             )}

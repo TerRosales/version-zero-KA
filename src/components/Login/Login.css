@@ -1,0 +1,14 @@
+.app__signup-container {
+
+}
+
+.app__form-errorSet {
+    display: flex;
+    flex-direction: column;
+    color: red;
+    background-color: rgba(grey, 0.23);
+}
+
+.app__form-error {
+    color: red;
+}
