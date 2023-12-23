@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Login.css";
 
 interface FormData {
   username: string;
   emailAddress: string;
   securityPin: string;
   password: string;
+}
+
+interface PasswordErrors {
+  lengthError?: string;
+  lowercaseError?: string;
+  uppercaseError?: string;
+  numberError?: string;
+  specialCharError?: string;
 }
 
 const SignUp = () => {
@@ -16,10 +25,12 @@ const SignUp = () => {
     password: "",
   };
 
-  const initialErrors: Partial<FormData> = {};
+  const initialErrors: Partial<FormData & { password?: PasswordErrors }> = {};
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [errors, setErrors] = useState<Partial<FormData>>(initialErrors);
+  const [errors, setErrors] = useState<Partial<FormData & { password?: PasswordErrors }>>(
+    initialErrors
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,9 +41,54 @@ const SignUp = () => {
     setErrors(initialErrors);
   };
 
+  const validatePassword = (password: string): PasswordErrors => {
+    const passwordErrors: PasswordErrors = {};
+
+    if (password.trim().length < 8) {
+      passwordErrors.lengthError = "Password must be at least 8 characters long";
+    }
+
+    if (!/(?=.*[a-z])/.test(password)) {
+      passwordErrors.lowercaseError = "Password must contain at least one lowercase letter";
+    }
+
+    if (!/(?=.*[A-Z])/.test(password)) {
+      passwordErrors.uppercaseError = "Password must contain at least one uppercase letter";
+    }
+
+    if (!/(?=.*\d)/.test(password)) {
+      passwordErrors.numberError = "Password must contain at least one number";
+    }
+
+    if (!/(?=.*[@$!%*?&])/.test(password)) {
+      passwordErrors.specialCharError = "Password must contain at least one special character";
+    }
+
+    return passwordErrors;
+  };
+
+  const validateSecurityPin = (pin: string): string | undefined => {
+    if (!pin.trim()) {
+      return "Security Pin is required";
+    }
+  
+    if (
+      pin.trim().length < 6 ||
+      /^\d{6}$/.test(pin.trim()) ||
+      pin.trim() === "123456789" ||
+      /\d{8,}/.test(pin.trim()) || // Check for any sequence of 8 or more consecutive digits
+      /012345|123456|234567|345678|456789/.test(pin.trim()) // Check for specific sequences
+    ) {
+      return "Security Pin cannot be a consecutive or repeated number combination";
+    }
+  
+    return undefined;
+  };
+  
+
   const validateForm = () => {
     let valid = true;
-    const newErrors: Partial<FormData> = {};
+    const newErrors: Partial<FormData & { password?: PasswordErrors }> = {};
 
     if (!formData.username.trim()) {
       newErrors.username = "Username is required";
@@ -47,20 +103,21 @@ const SignUp = () => {
       valid = false;
     }
 
+    const securityPinError = validateSecurityPin(formData.securityPin);
+    if (securityPinError) {
+      newErrors.securityPin = securityPinError;
+      valid = false;
+    }
+
     if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
+      newErrors.password = { lengthError: "Password is required" };
       valid = false;
-    } else if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters long";
-      valid = false;
-    } else if (
-      !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(
-        formData.password
-      )
-    ) {
-      newErrors.password =
-        "Password must contain at least 8 characters, one lowercase letter, one uppercase letter, one number, and one special character.";
-      valid = false;
+    } else {
+      const passwordValidationErrors = validatePassword(formData.password);
+      if (Object.keys(passwordValidationErrors).length > 0) {
+        valid = false;
+        newErrors.password = passwordValidationErrors;
+      }
     }
 
     setErrors(newErrors);
@@ -70,10 +127,7 @@ const SignUp = () => {
   const handleSignup = async () => {
     if (validateForm()) {
       try {
-        const response = await axios.post(
-          "http://localhost:3001/signup",
-          formData
-        );
+        const response = await axios.post("http://localhost:3001/signup", formData);
         console.log("Signup successful:", response.data);
         // Reset errors on successful signup
         resetErrors();
@@ -106,11 +160,12 @@ const SignUp = () => {
         {errors.emailAddress && <span>{errors.emailAddress}</span>}
         <br />
         <input
-          type="number"
+          type="string"
           name="securityPin"
           placeholder="Security Pin"
           onChange={handleInputChange}
         />
+        {errors.securityPin && <span>{errors.securityPin}</span>}
         <br />
         <input
           type="password"
@@ -118,7 +173,29 @@ const SignUp = () => {
           placeholder="Password"
           onChange={handleInputChange}
         />
-        {errors.password && <span>{errors.password}</span>}
+        <br />
+        {errors.password && (
+          <div>
+            {errors.password.lengthError && (
+              <span className="app__signup-error">{errors.password.lengthError}</span>
+            )}
+            <br />
+            {errors.password.lowercaseError && (
+              <span className="app__signup-error">{errors.password.lowercaseError}</span>
+            )}
+            <br />
+            {errors.password.uppercaseError && (
+              <span className="app__signup-error">{errors.password.uppercaseError}</span>
+            )}
+            <br />
+            {errors.password.numberError && (
+              <span className="app__signup-error">{errors.password.numberError}</span>
+            )}
+            {errors.password.specialCharError && (
+              <span className="app__signup-error">{errors.password.specialCharError}</span>
+            )}
+          </div>
+        )}
         <br />
         <button type="button" onClick={handleSignup}>
           Sign Up
