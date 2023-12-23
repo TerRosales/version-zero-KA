@@ -10,7 +10,7 @@ interface FormData {
 }
 
 interface PasswordErrors {
-  lengthError?: string;
+  lengthError?: any;
   lowercaseError?: string;
   uppercaseError?: string;
   numberError?: string;
@@ -67,22 +67,35 @@ const SignUp = () => {
     return passwordErrors;
   };
 
-  const validateSecurityPin = (pin: string): string | undefined => {
-    if (!pin.trim()) {
+  const validateSecurityPin = (pin: string): string  => {
+    let pinNumber = pin.trim();
+    if (!pinNumber) {
       return "Security Pin is required";
     }
   
-    if (
-      pin.trim().length < 6 ||
-      /^\d{6}$/.test(pin.trim()) ||
-      pin.trim() === "123456789" ||
-      /\d{8,}/.test(pin.trim()) || // Check for any sequence of 8 or more consecutive digits
-      /012345|123456|234567|345678|456789/.test(pin.trim()) // Check for specific sequences
-    ) {
-      return "Security Pin cannot be a consecutive or repeated number combination";
+    if (pinNumber.length < 6 || pinNumber.length > 8 ) {
+      return "Security Pin must be 6-8 characters long";
     }
   
-    return undefined;
+    const consecutiveDigitsRegex = /(\d)\1{5}/;
+
+    if (consecutiveDigitsRegex.test(pinNumber)) {
+      return "Security Pin cannot consist of six consecutive digits";
+    }
+ 
+    const consecutiveSequences = ["012345", "123456", "234567", "345678", "456789"];
+
+    for (const sequence of consecutiveSequences) {
+      if (pin.includes(sequence)) {
+        return "Security Pin cannot contain a specific consecutive sequence";
+      }
+    }
+  
+    if (!/^\d+$/.test(pinNumber)) {
+      return "Security Pin must consist of digits only";
+    }
+  
+    return "";
   };
   
 
