@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
+import "../../global.css";
+import Switch from "../Utility/Switch";
 
 interface FormData {
   username: string;
@@ -28,9 +30,8 @@ const SignUp = () => {
   const initialErrors: Partial<FormData & { password?: PasswordErrors }> = {};
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [errors, setErrors] = useState<Partial<FormData & { password?: PasswordErrors }>>(
-    initialErrors
-  );
+  const [errors, setErrors] =
+    useState<Partial<FormData & { password?: PasswordErrors }>>(initialErrors);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -45,15 +46,18 @@ const SignUp = () => {
     const passwordErrors: PasswordErrors = {};
 
     if (password.trim().length < 8) {
-      passwordErrors.lengthError = "Password must be at least 8 characters long";
+      passwordErrors.lengthError =
+        "Password must be at least 8 characters long";
     }
 
     if (!/(?=.*[a-z])/.test(password)) {
-      passwordErrors.lowercaseError = "Password must contain at least one lowercase letter";
+      passwordErrors.lowercaseError =
+        "Password must contain at least one lowercase letter";
     }
 
     if (!/(?=.*[A-Z])/.test(password)) {
-      passwordErrors.uppercaseError = "Password must contain at least one uppercase letter";
+      passwordErrors.uppercaseError =
+        "Password must contain at least one uppercase letter";
     }
 
     if (!/(?=.*\d)/.test(password)) {
@@ -61,43 +65,49 @@ const SignUp = () => {
     }
 
     if (!/(?=.*[@$!%*?&])/.test(password)) {
-      passwordErrors.specialCharError = "Password must contain at least one special character";
+      passwordErrors.specialCharError =
+        "Password must contain at least one special character";
     }
 
     return passwordErrors;
   };
 
-  const validateSecurityPin = (pin: string): string  => {
+  const validateSecurityPin = (pin: string): string => {
     let pinNumber = pin.trim();
     if (!pinNumber) {
       return "Security Pin is required";
     }
-  
-    if (pinNumber.length < 6 || pinNumber.length > 8 ) {
+
+    if (pinNumber.length < 6 || pinNumber.length > 8) {
       return "Security Pin must be 6-8 characters long";
     }
-  
+
     const consecutiveDigitsRegex = /(\d)\1{5}/;
 
     if (consecutiveDigitsRegex.test(pinNumber)) {
       return "Security Pin cannot consist of six consecutive digits";
     }
- 
-    const consecutiveSequences = ["012345", "123456", "234567", "345678", "456789"];
+
+    const consecutiveSequences = [
+      "012345",
+      "123456",
+      "234567",
+      "345678",
+      "456789",
+    ];
 
     for (const sequence of consecutiveSequences) {
       if (pin.includes(sequence)) {
         return "Security Pin cannot contain a specific consecutive sequence";
       }
     }
-  
+
     if (!/^\d+$/.test(pinNumber)) {
       return "Security Pin must consist of digits only";
     }
-  
+
     return "";
   };
-  
 
   const validateForm = () => {
     let valid = true;
@@ -140,7 +150,10 @@ const SignUp = () => {
   const handleSignup = async () => {
     if (validateForm()) {
       try {
-        const response = await axios.post("http://localhost:3001/signup", formData);
+        const response = await axios.post(
+          "http://localhost:3001/signup",
+          formData
+        );
         console.log("Signup successful:", response.data);
         // Reset errors on successful signup
         resetErrors();
@@ -154,70 +167,140 @@ const SignUp = () => {
 
   return (
     <div className="app__signup-container">
-      <h1 className="app__signup-form_title">Signup Page</h1>
-      <form className="app__signup-form">
-        <input
-          className="app__signup-form_input"
-          type="text"
-          name="username"
-          placeholder="Username"
-          onChange={handleInputChange}
-        />
-        <br />
-        {errors.username && <span className="app__form-error">{errors.username}</span>}
-        <br />
-        <input
-          className="app__signup-form_input"
-          type="email"
-          name="emailAddress"
-          placeholder="Email Address"
-          onChange={handleInputChange}
-        />
-        <br />
-        {errors.emailAddress && <span className="app__form-error">{errors.emailAddress}</span>}
-        <br />
-        <input
-          className="app__signup-form_input"
-          type="string"
-          name="securityPin"
-          placeholder="Security Pin"
-          onChange={handleInputChange}
-        />
-        <br />
-        {errors.securityPin && <span className="app__form-error">{errors.securityPin}</span>}
-        <br />
-        <input
-          className="app__signup-form_input"
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleInputChange}
-        />
-        <br />
-        {errors.password && (
-          <div className="app__form-errorSet">
-            {errors.password.lengthError && (
-              <span className="app__signup-error">{errors.password.lengthError}</span>
-            )}
-            {errors.password.lowercaseError && (
-              <span className="app__signup-error">{errors.password.lowercaseError}</span>
-            )}
-            {errors.password.uppercaseError && (
-              <span className="app__signup-error">{errors.password.uppercaseError}</span>
-            )}
-            {errors.password.numberError && (
-              <span className="app__signup-error">{errors.password.numberError}</span>
-            )}
-            {errors.password.specialCharError && (
-              <span className="app__signup-error">{errors.password.specialCharError}</span>
-            )}
-          </div>
-        )}
-        <br />
-        <button type="button" onClick={handleSignup}>
-          Sign Up
-        </button>
-      </form>
+      <Switch />
+      <h1 className="app__signup-form_title">Account Registration</h1>
+      <div className="app__signup-form_container">
+        <form className="app__signup-form">
+          <label htmlFor="username">Username: </label>
+          <br />
+          <input
+            className="app__signup-form_input"
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={handleInputChange}
+          />
+          <br />
+          {errors.username && (
+            <span className="app__form-error">{errors.username}</span>
+          )}
+          <br />
+          <label htmlFor="emailAddress">Email Address: </label>
+          <br />
+          <input
+            className="app__signup-form_input"
+            type="email"
+            name="emailAddress"
+            placeholder="Email Address"
+            onChange={handleInputChange}
+          />
+          <br />
+          {errors.emailAddress && (
+            <span className="app__form-error">{errors.emailAddress}</span>
+          )}
+          <br />
+          <label htmlFor="securityPin">Security Pin: </label>
+          <br />
+          <input
+            className="app__signup-form_input"
+            type="string"
+            name="securityPin"
+            placeholder="Security Pin"
+            onChange={handleInputChange}
+          />
+          <br />
+          {errors.securityPin && (
+            <span className="app__form-error">{errors.securityPin}</span>
+          )}
+          <br />
+          <label htmlFor="password">Password: </label>
+          <br />
+          <input
+            className="app__signup-form_input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleInputChange}
+          />
+          <br />
+          {errors.password && (
+            <div className="app__form-errorSet">
+              {errors.password.lengthError && (
+                <span className="app__signup-error">
+                  {errors.password.lengthError}
+                </span>
+              )}
+              {errors.password.lowercaseError && (
+                <span className="app__signup-error">
+                  {errors.password.lowercaseError}
+                </span>
+              )}
+              {errors.password.uppercaseError && (
+                <span className="app__signup-error">
+                  {errors.password.uppercaseError}
+                </span>
+              )}
+              {errors.password.numberError && (
+                <span className="app__signup-error">
+                  {errors.password.numberError}
+                </span>
+              )}
+              {errors.password.specialCharError && (
+                <span className="app__signup-error">
+                  {errors.password.specialCharError}
+                </span>
+              )}
+            </div>
+          )}
+          <br />
+          <label htmlFor="confirMPassword">Confirm Password: </label>
+          <br />
+          <input
+            className="app__signup-form_input"
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            onChange={handleInputChange}
+          />
+          <br />
+          {errors.password && (
+            <div className="app__form-errorSet">
+              {errors.password.lengthError && (
+                <span className="app__signup-error">
+                  {errors.password.lengthError}
+                </span>
+              )}
+              {errors.password.lowercaseError && (
+                <span className="app__signup-error">
+                  {errors.password.lowercaseError}
+                </span>
+              )}
+              {errors.password.uppercaseError && (
+                <span className="app__signup-error">
+                  {errors.password.uppercaseError}
+                </span>
+              )}
+              {errors.password.numberError && (
+                <span className="app__signup-error">
+                  {errors.password.numberError}
+                </span>
+              )}
+              {errors.password.specialCharError && (
+                <span className="app__signup-error">
+                  {errors.password.specialCharError}
+                </span>
+              )}
+            </div>
+          )}
+          <button
+            className="custom__button"
+            type="button"
+            onClick={handleSignup}
+          >
+            Sign Up
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
