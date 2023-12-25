@@ -2,7 +2,18 @@ import React, { useState } from 'react';
 
 const ParentForm = () => {
   return (
-    <div>ParentForm</div>
+    <div className='parent__form-input'>
+      <label htmlFor="parentSelect" >
+        Choose Guardianship: 
+      </label>
+      <br />
+      <select name="parentSelect" id="parentSelect">
+        
+        <option value="Guardian">Guardian</option>
+        <option value="Teacher">Teacher</option>
+        <option value="Parent">Parent</option>
+      </select>
+    </div>
   )
 }
 

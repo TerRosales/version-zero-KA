@@ -14,7 +14,7 @@ const Login = () => {
     setIsParentForm((prevState) => !prevState);
   };
   return (
-    <div className='app__login-container'>
+    <div className="app__toggle-container">
       <div className="toggle-switch">
         <label className="switch">
           <input
@@ -25,8 +25,9 @@ const Login = () => {
           <span className="slider round"></span>
         </label>
         {isParentForm ? <ParentForm /> : <ChildForm />}
-      </div>
+      
       <SignUp/>
+      </div>
     </div>
     );
 }
