@@ -81,30 +81,39 @@
   bottom: 0;
   background-color: red;
   border-radius: 10px;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 45px;
+  height: 40px;
   width: 200px;
   left: 4px;
   bottom: 4px;
   background-color: white;
   border-radius: 10px;
   transform: translateY(-2px);
-  transition: .4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 input:checked + .slider:before {
   transform: translateX(190px) translateY(4px);
 }
 
-.parent__form-input select,.child__form-input select {
+.parent__form-input select,
+.child__form-input select {
   width: 10rem;
+}
+
+.app__form-select_container h2 {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }

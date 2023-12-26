@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React from "react";
 
 const ParentForm = () => {
   return (
-    <div className='parent__form-input'>
-      <label htmlFor="parentSelect" >
-        Choose Guardianship: 
-      </label>
-      <br />
-      <select name="parentSelect" id="parentSelect">
-        
-        <option value="Guardian">Guardian</option>
-        <option value="Teacher">Teacher</option>
-        <option value="Parent">Parent</option>
-      </select>
+    <div className="app__form-select_container">
+      <h2>Guardian Registrasion</h2>
+      <div className="parent__form-input">
+        <label htmlFor="parentSelect">Choose Guardianship:</label>
+        <br />
+        <select name="parentSelect" id="parentSelect">
+          <option value="Guardian">Guardian</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Parent">Parent</option>
+        </select>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ParentForm
-
+export default ParentForm;
 
 // import "./App.css"
 
