@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
-    <div className="white">
+    <div className="app container-xl">
       <Navbar />
       <Login />
     </div>
