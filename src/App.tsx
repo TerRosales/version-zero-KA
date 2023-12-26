@@ -3,10 +3,9 @@ import "./App.css";
 import Login from "./components/Login/index";
 import Navbar from "./components/Navbar/Navbar";
 
-
 function App() {
   return (
-    <div>
+    <div className="white">
       <Navbar />
       <Login />
     </div>
@@ -14,5 +13,3 @@ function App() {
 }
 
 export default App;
-
-

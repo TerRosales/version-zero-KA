@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import "../../global.css";
-import Switch from "../Utility/Switch";
 
 interface FormData {
   username: string;
@@ -167,7 +166,6 @@ const SignUp = () => {
 
   return (
     <div className="app__signup-container">
-      <Switch />
       <div className="app__signup-form_container">
         <form className="app__signup-form">
           <label htmlFor="username">Username: </label>
