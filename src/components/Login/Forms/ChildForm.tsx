@@ -4,7 +4,7 @@ import "./Forms.css";
 const ChildForm = () => {
   return (
     <div className="app__form-select_container">
-      <h2>kidAdult Registrasion</h2>
+      <h1 className="app__signup-form_title">Account Registration</h1>
       <div className="child__form-input">
         <label htmlFor="chilSelect">Choose Grade Level:</label>
         <br />

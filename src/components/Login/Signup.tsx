@@ -168,7 +168,6 @@ const SignUp = () => {
   return (
     <div className="app__signup-container">
       <Switch />
-      <h1 className="app__signup-form_title">Account Registration</h1>
       <div className="app__signup-form_container">
         <form className="app__signup-form">
           <label htmlFor="username">Username: </label>
