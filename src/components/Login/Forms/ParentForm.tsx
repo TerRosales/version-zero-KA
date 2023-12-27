@@ -1,5 +1,6 @@
 import React from "react";
 import "./Forms.css";
+import SignUp from "../Signup";
 
 const ParentForm = () => {
   return (
@@ -14,6 +15,7 @@ const ParentForm = () => {
           <option value="Teacher">Teacher</option>
           <option value="Parent">Parent</option>
         </select>
+        <SignUp />
       </div>
     </div>
   );

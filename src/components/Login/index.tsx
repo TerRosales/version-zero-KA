@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import SignUp from './Signup'
-import "./Login.css"
-import ParentForm from '../Login/Forms/ParentForm';
-import ChildForm from '../Login/Forms/ChildForm';
+import React, { useState } from "react";
+import "./Login.css";
+import ParentForm from "../Login/Forms/ParentForm";
+import ChildForm from "../Login/Forms/ChildForm";
 // Registration From, Login Design w/ Toggle for Parent/Guardian and Children
 // Light and Dark Toggle
 
-
-
-const Login = () => {
+const AccountTypeToggle = () => {
   const [isParentForm, setIsParentForm] = useState(true);
   const toggleForm = () => {
     setIsParentForm((prevState) => !prevState);
@@ -17,20 +14,13 @@ const Login = () => {
     <div className="app__toggle-container">
       <div className="app__toggle-switch">
         <label className="app__switch">
-          <input
-            type="checkbox"
-            checked={isParentForm}
-            onChange={toggleForm}
-          />
+          <input type="checkbox" checked={isParentForm} onChange={toggleForm} />
           <span className="app__slider round"></span>
         </label>
         {isParentForm ? <ParentForm /> : <ChildForm />}
-      
-      <SignUp/>
       </div>
     </div>
-    );
-}
+  );
+};
 
-
-export default Login
+export default AccountTypeToggle;
