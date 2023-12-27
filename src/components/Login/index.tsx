@@ -15,14 +15,14 @@ const Login = () => {
   };
   return (
     <div className="app__toggle-container">
-      <div className="toggle-switch">
-        <label className="switch">
+      <div className="app__toggle-switch">
+        <label className="app__switch">
           <input
             type="checkbox"
             checked={isParentForm}
             onChange={toggleForm}
           />
-          <span className="slider round"></span>
+          <span className="app__slider round"></span>
         </label>
         {isParentForm ? <ParentForm /> : <ChildForm />}
       

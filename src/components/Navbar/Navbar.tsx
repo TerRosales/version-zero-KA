@@ -6,7 +6,7 @@ const Navbar = () => {
   // edit style
   // connect login with authenthication
   return (
-    <div className="bg-teal-900 p-4 flex justify-between items-center">
+    <div className="container-2xl bg-teal-900 p-4 flex justify-between items-center">
       <div className="text-white text-sm">KidAdult</div>
       <div className="bg-red-500 text-white p-2 rounded mx-auto">
         Leaderboard

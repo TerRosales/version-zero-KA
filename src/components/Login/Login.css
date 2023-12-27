@@ -43,24 +43,27 @@
   border: 1px solid #222;
   border-radius: 10px;
   display: flex;
-  position: absolute;
-  right: 25%;
-  padding: 0 11%;
-  width: 50%;
-  margin: 2rem;
-  padding-top: 1.5rem;
+  position: relative;
+  width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
   background-color: white;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
-.toggle-switch {
+.app__toggle-switch {
+  padding: 0 200px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-.switch {
+.app__switch {
   border: 1px solid #222;
   border-radius: 10px;
   position: relative;
@@ -69,13 +72,13 @@
   height: 50px;
 }
 
-.switch input {
+.app__switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.slider {
+.app__slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -87,7 +90,7 @@
   transition: 0.4s;
 }
 
-.slider:before {
+.app__slider:before {
   position: absolute;
   content: "";
   height: 40px;
@@ -100,11 +103,11 @@
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked + .app__slider {
   background-color: rgba(18, 78, 74, 0.8);
 }
 
-input:checked + .slider:before {
+input:checked + .app__slider:before {
   transform: translateX(194px) translateY(4px);
 }
 
