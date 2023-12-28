@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
-import ParentForm from "../Login/Forms/ParentForm";
-import ChildForm from "../Login/Forms/ChildForm";
+import ParentForm from "./Forms/ParentForm";
+import ChildForm from "./Forms/ChildForm";
 // Registration From, Login Design w/ Toggle for Parent/Guardian and Children
 // Light and Dark Toggle
 

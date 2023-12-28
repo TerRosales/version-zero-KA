@@ -18,7 +18,7 @@ interface PasswordErrors {
   specialCharError?: string;
 }
 
-const SignUp = () => {
+const SignUp = ({ guardianship }) => {
   const initialFormData: FormData = {
     username: "",
     emailAddress: "",
@@ -149,14 +149,13 @@ const SignUp = () => {
   const handleSignup = async () => {
     if (validateForm()) {
       try {
+        const dataToSend = { ...formData, guardianship };
         const response = await axios.post(
           "http://localhost:3001/signup",
-          formData
+          dataToSend
         );
         console.log("Signup successful:", response.data);
-        // Reset errors on successful signup
         resetErrors();
-        // Reset form fields to initial state if needed
         setFormData(initialFormData);
       } catch (error) {
         console.error("Signup failed:", error);

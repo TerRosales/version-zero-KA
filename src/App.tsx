@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import AccountTypeToggle from "./components/Login/index";
+import AccountTypeToggle from "./components/Login/Toggle";
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {

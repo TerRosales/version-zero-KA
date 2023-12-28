@@ -24,7 +24,7 @@ const ChildForm = () => {
           <option value="juniorHS">Junior High School</option>
           <option value="seniorHS">Senior High School</option>
         </select>
-        <SignUp />
+        {/* <SignUp /> */}
       </div>
     </div>
   );
