@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Forms.css";
 import SignUp from "../Signup";
 
 const ChildForm = () => {
+  const [gradeLevel, setGradeLevel] = useState(""); // Initial grade level
+
+  const handleGradeLevelChange = (e) => {
+    setGradeLevel(e.target.value);
+  };
   return (
     <div className="app__form-select_container">
       <h1 className="app__signup-form_title">Account Registration</h1>
       <div className="child__form-input">
-        <label htmlFor="chilSelect">Choose Grade Level:</label>
+        <label htmlFor="childSelect">Choose Grade Level:</label>
         <br />
-        <select name="chilSelect" id="chilSelect">
+        <select 
+          name="childSelect" id="childSelect"
+          value={gradeLevel}
+          onChange={handleGradeLevelChange}>
           <option value="firstGrade">First Grade</option>
           <option value="secondGrade">Second Grade</option>
           <option value="thirdGrade">Third Grade</option>
@@ -24,7 +32,7 @@ const ChildForm = () => {
           <option value="juniorHS">Junior High School</option>
           <option value="seniorHS">Senior High School</option>
         </select>
-        {/* <SignUp /> */}
+        <SignUp guardianship="Guardian" gradeLevel={gradeLevel} />
       </div>
     </div>
   );

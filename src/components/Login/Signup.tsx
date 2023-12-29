@@ -18,7 +18,7 @@ interface PasswordErrors {
   specialCharError?: string;
 }
 
-const SignUp = ({ guardianship }) => {
+const SignUp = ({ guardianship, gradeLevel  }) => {
   const initialFormData: FormData = {
     username: "",
     emailAddress: "",
@@ -149,7 +149,7 @@ const SignUp = ({ guardianship }) => {
   const handleSignup = async () => {
     if (validateForm()) {
       try {
-        const dataToSend = { ...formData, guardianship };
+        const dataToSend = { ...formData, guardianship, gradeLevel };
         const response = await axios.post(
           "http://localhost:3001/signup",
           dataToSend

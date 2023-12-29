@@ -10,6 +10,7 @@ const AccountTypeToggle = () => {
   const toggleForm = () => {
     setIsParentForm((prevState) => !prevState);
   };
+  
   return (
     <div className="app__toggle-container">
       <div className="app__toggle-switch">
