@@ -1,9 +1,16 @@
 import express, { Request, Response } from "express";
 import { MongoClient, ServerApiVersion } from "mongodb";
 import cors from "cors"; // Import the cors middleware
+import * as bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const app = express();
 const port = 3001;
+
+//npm install jsonwebtoken
+//npm i --save-dev @types/jsonwebtoken
+
+//npm i --save-dev @types/bcrypt
 
 app.use(cors()); // Enable CORS for all routes
 
@@ -43,18 +50,105 @@ app.post("/signup", async (req: Request, res: Response) => {
   try {
     await connectToMongo();
 
-    // Assuming you have a 'users' collection
     const usersCollection = client.db("your_database_name").collection("users");
-    const newUser = req.body; // Assuming the request body contains user data
+    const {
+      username,
+      emailAddress,
+      securityPin,
+      password,
+      guardianship,
+      gradeLevel,
+    } = req.body;
 
-    // Add additional logic for password hashing, validation, etc.
-    // Example: newUser.password = hashPassword(newUser.password);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    let newUser;
+
+    if (guardianship) {
+      newUser = {
+        username,
+        emailAddress,
+        securityPin,
+        password: hashedPassword,
+        guardianship,
+      };
+    } else {
+      newUser = {
+        username,
+        emailAddress,
+        securityPin,
+        password: hashedPassword,
+        gradeLevel,
+      };
+    }
+
+    const existingUserWithEmail = await usersCollection.findOne({
+      emailAddress: newUser.emailAddress,
+    });
+
+    const existingUserWithUsername = await usersCollection.findOne({
+      username: newUser.username,
+    });
+
+    if (existingUserWithEmail) {
+      return res.status(400).json({ error: "Email address already exists" });
+    }
+
+    if (existingUserWithUsername) {
+      return res.status(400).json({ error: "Username already exists" });
+    }
 
     const result = await usersCollection.insertOne(newUser);
     res.json({ message: "Signup successful", insertedId: result.insertedId });
   } catch (error) {
     console.error("Signup failed:", error);
     res.status(500).json({ error: "Signup failed" });
+  } finally {
+    await closeMongoConnection();
+  }
+});
+
+app.post("/login", async (req: Request, res: Response) => {
+  try {
+    await connectToMongo();
+
+    const usersCollection = client.db("your_database_name").collection("users");
+    const { username, password } = req.body;
+
+    console.log(
+      `Attempting login with username: ${username}, password: ${password}`
+    );
+
+    // Find user by username in the database
+    const user = await usersCollection.findOne({ username });
+
+    if (!user) {
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+
+    // Compare the provided password with the stored hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      // Passwords match, create a JWT
+      const token = jwt.sign(
+        {
+          userId: user._id, // You might include additional user data here
+          username: user.username,
+        },
+        "p73HT5kzmgE3lTSyiDvnLuN6o18Yv", //SECRET KEY
+        { expiresIn: "1h" } // Token expiration time
+      );
+
+      // Set the token as an HTTP cookie
+      res.cookie("token", token, { httpOnly: false, maxAge: 3600000 });
+      // Send the JWT as part of the response
+      res.json({ message: "Login successful", token });
+    } else {
+      res.status(401).json({ error: "Invalid username or password" });
+    }
+  } catch (error) {
+    console.error("Login failed:", error);
+    res.status(500).json({ error: "Login failed" });
   } finally {
     await closeMongoConnection();
   }

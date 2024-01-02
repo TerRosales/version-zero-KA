@@ -14,25 +14,27 @@ const ChildForm = () => {
       <div className="child__form-input">
         <label htmlFor="childSelect">Choose Grade Level:</label>
         <br />
-        <select 
-          name="childSelect" id="childSelect"
+        <select
+          name="childSelect"
+          id="childSelect"
           value={gradeLevel}
-          onChange={handleGradeLevelChange}>
-          <option value="firstGrade">First Grade</option>
-          <option value="secondGrade">Second Grade</option>
-          <option value="thirdGrade">Third Grade</option>
-          <option value="fourthGrade">Fourth Grade</option>
-          <option value="fifthGrade">Fifth Grade</option>
-          <option value="sixthGrade">Sixth Grade</option>
-          <option value="seventhGrade">Seventh Grade</option>
-          <option value="eighthGrade">Eighth Grade</option>
-          <option value="sixthGrade">Sixth Grade</option>
-          <option value="freshmanHS">Freshman High School</option>
-          <option value="sophomoreHS">Sophomore High School</option>
-          <option value="juniorHS">Junior High School</option>
-          <option value="seniorHS">Senior High School</option>
+          onChange={handleGradeLevelChange}
+        >
+          <option value="first Grade">First Grade</option>
+          <option value="second Grade">Second Grade</option>
+          <option value="third Grade">Third Grade</option>
+          <option value="fourth Grade">Fourth Grade</option>
+          <option value="fifth Grade">Fifth Grade</option>
+          <option value="sixth Grade">Sixth Grade</option>
+          <option value="seventh Grade">Seventh Grade</option>
+          <option value="eighth Grade">Eighth Grade</option>
+          <option value="sixth Grade">Sixth Grade</option>
+          <option value="freshman HS">Freshman High School</option>
+          <option value="sophomore HS">Sophomore High School</option>
+          <option value="junior HS">Junior High School</option>
+          <option value="senior HS">Senior High School</option>
         </select>
-        <SignUp guardianship="Guardian" gradeLevel={gradeLevel} />
+        <SignUp gradeLevel={gradeLevel} />
       </div>
     </div>
   );
