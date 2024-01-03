@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./Signup.css";
 import ParentForm from "./Forms/ParentForm";
 import ChildForm from "./Forms/ChildForm";
 // Registration From, Login Design w/ Toggle for Parent/Guardian and Children
@@ -10,7 +10,7 @@ const AccountTypeToggle = () => {
   const toggleForm = () => {
     setIsParentForm((prevState) => !prevState);
   };
-  
+
   return (
     <div className="app__toggle-container">
       <div className="app__toggle-switch">

@@ -11,10 +11,11 @@ const ChildForm = () => {
   return (
     <div className="app__form-select_container">
       <h1 className="app__signup-form_title">Account Registration</h1>
-      <div className="child__form-input">
+      <div className="app__child__form-input">
         <label htmlFor="childSelect">Choose Grade Level:</label>
         <br />
         <select
+          className="app__signup-form_select"
           name="childSelect"
           id="childSelect"
           value={gradeLevel}
@@ -41,37 +42,3 @@ const ChildForm = () => {
 };
 
 export default ChildForm;
-
-// import "./App.css"
-
-// const ParentForm = () => {
-//   return <div>Parent Form</div>;
-// };
-
-// const ChildForm = () => {
-//   return <div>Child Form</div>;
-// };
-
-// const ToggleSwitch = () => {
-//   const [isParentForm, setIsParentForm] = useState(true);
-
-//   const toggleForm = () => {
-//     setIsParentForm((prevState) => !prevState);
-//   };
-
-//   return (
-//     <div className="toggle-switch">
-//       <label className="switch">
-//         <input
-//           type="checkbox"
-//           checked={isParentForm}
-//           onChange={toggleForm}
-//         />
-//         <span className="slider round"></span>
-//       </label>
-//       {isParentForm ? <ParentForm /> : <ChildForm />}
-//     </div>
-//   );
-// };
-
-// export default ToggleSwitch;

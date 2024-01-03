@@ -17,6 +17,7 @@ const ParentForm = () => {
         <label htmlFor="parentSelect">Choose Guardianship:</label>
         <br />
         <select
+          className="app__signup-form_select "
           name="parentSelect"
           id="parentSelect"
           value={guardianship}

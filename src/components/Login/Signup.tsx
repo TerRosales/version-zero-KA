@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Login.css";
+import "./Signup.css";
 import "../../global.css";
 import { v4 as uuidv4 } from "uuid";
 

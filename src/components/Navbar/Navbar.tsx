@@ -1,4 +1,4 @@
-import "./Navbar.css"
+import "./Navbar.css";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -24,17 +24,15 @@ const Navbar = () => {
     }
   };
   return (
-    <nav className="container-2xl bg-teal-900 p-4 flex justify-between items-center">
+    <nav className="app__nav container-2xl">
       <div className="text-white text-sm">KidAdult</div>
-      <button className="leaderboards__button">
-        Leaderboard
-      </button>
+      <button className="leaderboards__button">Leaderboard</button>
       <div className="text-white flex items-center space-x-2">
         <label htmlFor="username">Login:</label>
         <input
           type="text"
           id="username"
-          className="border rounded px-2 py-1 text-sm text-black"
+          className="app__nav-input"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -43,7 +41,7 @@ const Navbar = () => {
         <input
           type="password"
           id="password"
-          className="border rounded px-2 py-1 text-sm text-black"
+          className="app__nav-input"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -51,6 +49,7 @@ const Navbar = () => {
         <button
           type="button"
           className="custom__button bg-red-500 text-white py-1 px-2 rounded-sm"
+          onClick={handleLogin}
         >
           Login
         </button>

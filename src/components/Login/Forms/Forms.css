@@ -1,0 +1,13 @@
+.app__form-select_container {
+}
+
+.app__sign-form_title {
+}
+
+.app__child__form-input,
+.app__parent__form-input {
+}
+
+.app__signup-form_select {
+  @apply text-white bg-black focus:bg-gradient-to-b from-slate-50 to-slate-900;
+}
