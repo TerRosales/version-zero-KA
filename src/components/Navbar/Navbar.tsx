@@ -1,4 +1,5 @@
 import React from "react";
+import "./Navbar.css"
 
 const Navbar = () => {
   //TO-DO
@@ -6,11 +7,11 @@ const Navbar = () => {
   // edit style
   // connect login with authenthication
   return (
-    <div className="container-2xl bg-teal-900 p-4 flex justify-between items-center">
+    <nav className="container-2xl bg-teal-900 p-4 flex justify-between items-center">
       <div className="text-white text-sm">KidAdult</div>
-      <div className="bg-red-500 text-white p-2 rounded mx-auto">
+      <button className="leaderboards__button">
         Leaderboard
-      </div>
+      </button>
       <div className="text-white flex items-center space-x-2">
         <label htmlFor="username">Login:</label>
         <input
@@ -28,12 +29,12 @@ const Navbar = () => {
         />
         <button
           type="button"
-          className="bg-red-500 text-white py-1 px-2 rounded-sm"
+          className="custom__button bg-red-500 text-white py-1 px-2 rounded-sm"
         >
           Login
         </button>
       </div>
-    </div>
+    </nav>
   );
 };
 
