@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import "../../global.css";
+import { v4 as uuidv4 } from "uuid";
 
 interface FormData {
   username: string;
   emailAddress: string;
   securityPin: string;
   password: string;
+  id: string;
+  guardianship?: string;
+  gradeLevel?: string;
 }
 
 interface PasswordErrors {
@@ -18,23 +22,33 @@ interface PasswordErrors {
   specialCharError?: string;
 }
 
-const SignUp = ({ guardianship, gradeLevel  }) => {
+interface SignUpProps {
+  guardianship?: string; // Making guardianship optional
+  gradeLevel: string;
+}
+
+const SignUp: React.FC<SignUpProps> = ({ guardianship, gradeLevel }) => {
   const initialFormData: FormData = {
     username: "",
     emailAddress: "",
     securityPin: "",
     password: "",
+    id: uuidv4(),
   };
 
   const initialErrors: Partial<FormData & { password?: PasswordErrors }> = {};
-
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [errors, setErrors] =
     useState<Partial<FormData & { password?: PasswordErrors }>>(initialErrors);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    if (name === "confirmPassword") {
+      setConfirmPassword(value);
+    } else {
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    }
   };
 
   const resetErrors = () => {
@@ -142,6 +156,11 @@ const SignUp = ({ guardianship, gradeLevel  }) => {
       }
     }
 
+    if (formData.password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+      valid = false;
+    }
+
     setErrors(newErrors);
     return valid;
   };
@@ -149,7 +168,12 @@ const SignUp = ({ guardianship, gradeLevel  }) => {
   const handleSignup = async () => {
     if (validateForm()) {
       try {
-        const dataToSend = { ...formData, guardianship, gradeLevel };
+        let dataToSend;
+        if (guardianship) {
+          dataToSend = { ...formData, guardianship };
+        } else {
+          dataToSend = { ...formData, gradeLevel };
+        }
         const response = await axios.post(
           "http://localhost:3001/signup",
           dataToSend
@@ -249,7 +273,7 @@ const SignUp = ({ guardianship, gradeLevel  }) => {
             </div>
           )}
           <br />
-          <label htmlFor="confirMPassword">Confirm Password: </label>
+          <label htmlFor="confirmPassword">Confirm Password: </label>
           <br />
           <input
             className="app__signup-form_input"
@@ -261,6 +285,11 @@ const SignUp = ({ guardianship, gradeLevel  }) => {
           <br />
           {errors.password && (
             <div className="app__form-errorSet">
+              {errors.confirmPassword && (
+                <span className="app__form-error">
+                  {errors.confirmPassword}
+                </span>
+              )}
               {errors.password.lengthError && (
                 <span className="app__signup-error">
                   {errors.password.lengthError}
