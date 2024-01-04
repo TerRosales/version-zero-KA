@@ -11,7 +11,7 @@ const ChildForm = () => {
   return (
     <div className="app__form-select_container">
       <h1 className="app__signup-form_title">Account Registration</h1>
-      <div className="app__child__form-input">
+      <div className="child__form-input">
         <label htmlFor="childSelect">Choose Grade Level:</label>
         <br />
         <select

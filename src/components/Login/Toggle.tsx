@@ -14,9 +14,14 @@ const AccountTypeToggle = () => {
   return (
     <div className="app__toggle-container">
       <div className="app__toggle-switch">
-        <label className="app__switch">
-          <input type="checkbox" checked={isParentForm} onChange={toggleForm} />
-          <span className="app__slider round"></span>
+        <label className="app__switch-label border-2">
+          <input
+            className="app__switch-input"
+            type="checkbox"
+            checked={isParentForm}
+            onChange={toggleForm}
+          />
+          <span className="app__slider"></span>
         </label>
         {isParentForm ? <ParentForm /> : <ChildForm />}
       </div>

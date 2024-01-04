@@ -1,3 +1,72 @@
+/* Outer COntainers */
+
+.app__toggle-container {
+  @apply w-[25rem] h-[42rem] py-6 px-[1rem] flex mx-auto my-[2rem] bg-white justify-center text-center
+  place-items-center rounded-2xl;
+}
+
+.app__toggle-switch {
+  @apply flex-col justify-center content-center text-center;
+}
+
+.app__switch-label {
+  border: 1px solid #222;
+  border-radius: 10px;
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  @apply inline-block w-[110px] h-10 rounded-xl;
+}
+
+/* Hides the checkbox */
+.app__switch-input {
+  @apply opacity-0 w-0 h-0;
+}
+
+.app__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: purple;
+  border-radius: 10px;
+  transition: 0.4s;
+  @apply top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-slate-500 to-slate-100;
+}
+
+.app__slider:before {
+  position: absolute;
+  content: "";
+  height: 30px;
+  width: 50px;
+  left: 3px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+
+input:checked + .app__slider {
+  @apply bg-gradient-to-b from-slate-100 to-slate-500;
+}
+
+input:checked + .app__slider:before {
+  transform: translateX(50px);
+}
+
+.parent__form-input,
+.child__form-input {
+  margin: 0 3.5rem;
+}
+
+.app__signup-form_select {
+  width: 10rem;
+  text-align: start;
+}
+
+/* Signup Form Container */
 .app__signup-container {
   display: flex;
   width: 400px;
@@ -19,6 +88,7 @@
 .app__signup-form input:focus {
   background-color: rgba(230, 250, 230, 1);
 }
+
 /* Signup Submit button initial style */
 /* .app__signup-form button {
   width: 110px;
@@ -38,87 +108,3 @@
 .app__form-error {
   color: red;
 }
-
-.app__toggle-container {
-  border: 1px solid #222;
-  border-radius: 10px;
-  display: flex;
-  position: relative;
-  width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: white;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-}
-
-.app__toggle-switch {
-  padding: 0 200px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.app__switch {
-  border: 1px solid #222;
-  border-radius: 10px;
-  position: relative;
-  display: inline-block;
-  width: 402px;
-  height: 50px;
-}
-
-.app__switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.app__slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: red;
-  border-radius: 10px;
-  transition: 0.4s;
-}
-
-.app__slider:before {
-  position: absolute;
-  content: "";
-  height: 40px;
-  width: 200px;
-  left: 3px;
-  bottom: 4px;
-  background-color: white;
-  border-radius: 10px;
-  transform: translateY(-4px);
-  transition: 0.4s;
-}
-
-input:checked + .app__slider {
-  background-color: rgba(18, 78, 74, 0.8);
-}
-
-input:checked + .app__slider:before {
-  transform: translateX(194px) translateY(4px);
-}
-
-.parent__form-input,
-.child__form-input {
-  margin: 0 3.5rem;
-}
-
-.parent__form-input select,
-.child__form-input select {
-  width: 10rem;
-  text-align: center;
-}
-

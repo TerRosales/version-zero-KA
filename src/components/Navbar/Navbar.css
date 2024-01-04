@@ -6,6 +6,10 @@
   @apply text-white bg-red-500 w-[110px] h-12 py-2 px-2 rounded-lg !important;
 }
 
+.login__button {
+  @apply bg-red-900 w-[70px] h-8 px-4 rounded-lg !important;
+}
+
 .app__nav {
   @apply bg-slate-950 p-4 flex justify-between items-center;
 }

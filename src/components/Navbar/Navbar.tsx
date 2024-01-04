@@ -48,7 +48,7 @@ const Navbar = () => {
         />
         <button
           type="button"
-          className="custom__button bg-red-500 text-white py-1 px-2 rounded-sm"
+          className="login__button bg-red-500 text-white py-1 px-2 rounded-sm"
           onClick={handleLogin}
         >
           Login
