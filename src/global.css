@@ -7,5 +7,5 @@
 }
 
 body {
-  @apply bg-gradient-to-b from-slate-900 to-slate-500;
+  @apply bg-fixed bg-gradient-to-b from-slate-900 to-slate-500;
 }
