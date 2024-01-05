@@ -48,10 +48,17 @@ const Navbar = () => {
         />
         <button
           type="button"
-          className="login__button bg-red-500 text-white py-1 px-2 rounded-sm"
+          className="login__button"
           onClick={handleLogin}
         >
           Login
+        </button>
+        <button
+          type="button"
+          className="logout__button"
+          onClick={handleLogin}
+        >
+          Logout
         </button>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 .custom__button {
-  @apply text-white bg-green-600 w-[100px] h-12 py-2 px-2 rounded-lg !important;
+  @apply my-5 text-white bg-green-500 w-[100px] h-12 py-2 px-2 rounded-lg !important;
 }
 
 .leaderboards__button {
@@ -8,6 +8,9 @@
 
 .login__button {
   @apply bg-red-900 w-[70px] h-8 px-4 rounded-lg !important;
+}
+.logout__button {
+  @apply bg-green-500 w-[70px] h-8 px-2 rounded-lg !important;
 }
 
 .app__nav {
