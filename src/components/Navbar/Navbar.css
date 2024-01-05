@@ -6,17 +6,23 @@
   @apply text-white bg-red-500 w-[110px] h-12 py-2 px-2 rounded-lg !important;
 }
 
+.app__nav {
+  @apply bg-slate-950 p-4 flex justify-between items-center;
+}
+
+/* Login form Stylings */
+
+.app__login-form {
+  @apply absolute right-[2rem] top-[6rem] w-[300px] h-[300px] bg-red-500 flex flex-col py-[50px];
+}
+
+.app__login-input {
+  @apply focus:bg-gray-200 border rounded px-2 py-1 text-sm text-black;
+}
+
 .login__button {
   @apply bg-red-900 w-[70px] h-8 px-4 rounded-lg !important;
 }
 .logout__button {
   @apply bg-green-500 w-[70px] h-8 px-2 rounded-lg !important;
-}
-
-.app__nav {
-  @apply bg-slate-950 p-4 flex justify-between items-center;
-}
-
-.app__nav-input {
-  @apply focus:bg-gray-200 border rounded px-2 py-1 text-sm text-black;
 }
