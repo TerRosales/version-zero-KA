@@ -13,11 +13,19 @@
 /* Login form Stylings */
 
 .app__login-form {
-  @apply absolute right-[2rem] top-[6rem] w-[300px] h-[300px] bg-red-500 flex flex-col py-[50px];
+  @apply absolute right-[2rem] top-[6rem] w-[300px] h-[300px] bg-red-500 flex flex-col py-[30px];
+}
+
+.app__login-form label {
+  @apply py-2;
 }
 
 .app__login-input {
   @apply focus:bg-gray-200 border rounded px-2 py-1 text-sm text-black;
+}
+
+.app__login-forgotPW {
+  @apply underline my-2;
 }
 
 .login__button {

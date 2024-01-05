@@ -179,8 +179,11 @@ const SignUp: React.FC<SignUpProps> = ({ guardianship, gradeLevel }) => {
           dataToSend
         );
         console.log("Signup successful:", response.data);
+
+        console.log("Before Reset - formData:", formData);
         resetErrors();
         setFormData(initialFormData);
+        console.log("After Reset - formData:", formData);
       } catch (error) {
         console.error("Signup failed:", error);
       }

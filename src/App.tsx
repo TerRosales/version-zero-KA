@@ -22,7 +22,7 @@ function App() {
       {isLoggedIn ? (
         <>
           {/* Routes accessible only when logged in */}
-          <Route path="/leaderboards" element={<Leaderboards />} />
+          {/* <Route path="/leaderboards" element={<Leaderboards />} /> */}
           {/* Redirect to "/dashboard" after successful login */}
           <Navigate to="/dashboard" />
         </>

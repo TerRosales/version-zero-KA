@@ -1,6 +1,6 @@
 import React from "react";
-import ParentSidebar from "./components/ParentSidebar";
-import ChildSidebar from "./components/ChildSidebar";
+import ParentSidebar from "../ParentSidebar/ParentSidebar";
+import ChildSidebar from "../ChildSidebar/ChildSidebar";
 import ParentView from "./ParentView";
 import ChildView from "./ChildView";
 interface User {

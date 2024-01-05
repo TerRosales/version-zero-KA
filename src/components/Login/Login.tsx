@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../Navbar/Navbar.css";
+import { useNavigate } from "react-router-dom";
+import LoggedIn from "./LoggedIn";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const [isLoggedIn, setLoggedIn] = useState(false);
   const handleLogin = async () => {
@@ -13,13 +16,14 @@ const Login = () => {
         username,
         password,
       });
-
+      const userData = response.data;
       // Handle successful login - e.g., set user authentication state, redirect, etc.
       console.log("Login successful:", response.data);
 
       // Update the isLoggedIn state
       setLoggedIn(true);
-
+      console.log("rerouting");
+      navigate("/dashboard", { state: { user: userData } });
       // Redirect to the dashboard after successful login
     } catch (error) {
       // Handle login failure - e.g., display error message
@@ -54,14 +58,24 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <a className="app__login-forgotPW" href="#">
+            Forgot Password?
+          </a>
           <button type="button" className="login__button" onClick={handleLogin}>
             Login
           </button>
         </>
       ) : (
-        <button type="button" className="logout__button" onClick={handleLogout}>
-          Logout
-        </button>
+        <>
+          <LoggedIn />
+          <button
+            type="button"
+            className="logout__button"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </>
       )}
     </div>
   );
